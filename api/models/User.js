@@ -23,8 +23,14 @@ const userSchema = mongoose.Schema({
         required : true,
         min : 4,
         max : 255,
-    }
-})
+    },
+
+    profilePicture : {
+        type : String,
+        default : "",
+    },
+
+},{timestamps:true})
 
 
-module.exports = mongoose.model('users',userSchema);
+module.exports = mongoose.model('User',userSchema);
