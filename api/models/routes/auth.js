@@ -18,8 +18,9 @@ router.post('/register',async(request,response)=>{
         response.status(200).json(user);
         
     } catch (err) {
-        response.status(500).json(err)
+        response.status(500).json(err);
     }
+    
 })
 
 //Login
@@ -32,8 +33,8 @@ router.get('/login',async(request,response)=>{
         //Password is Correct
         const validPass = await bcrypt.compare(request.body.password,user.password);
         if(!validPass) return response.status(400).send({message : 'Invalid Password'})
-        response.send({message : 'Login Success'})
-        
+        const {password,...others} = user._doc;
+        response.send(others)
     } catch (err) {
         response.json(err).status(500);
     }

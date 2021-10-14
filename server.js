@@ -7,7 +7,14 @@ const app = express();
 app.use(express.json());
 //Routes
 const authRoute = require('./api/models/routes/auth');
+const userRoute = require('./api/models/routes/users');
+const postRoute = require('./api/models/routes/posts');
+const categoryRoute = require('./api/models/routes/category');
+
 app.use('/api/auth',authRoute);
+app.use('/api/users',userRoute);
+app.use('/api/posts', postRoute);
+app.use('/api/categories',categoryRoute);
 
 //MongoDb Connection
 mongoose.connect(process.env.MONGO_CONNECTION,{useNewUrlParser:true,useUnifiedTopology:true},()=>{

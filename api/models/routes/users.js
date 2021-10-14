@@ -47,13 +47,23 @@ router.delete('/delete/:id',async(request,response)=>{
             response.json('User not found').status(401);
         }
     }
-    
+
     else {
         response.status(401).json('You can delete only your account');
     }
 })
 
+//GET USER
+router.get('/search/:id',async(request,response)=>{
+    try {
+        const user = await User.findById(request.params.id);
+        const {password, ...others} = user._doc;
+        response.status(200).json(others);
 
+    } catch (err) {
+        response.status(500).json({message : "user not found"});
+    }
+})
 
 
 
